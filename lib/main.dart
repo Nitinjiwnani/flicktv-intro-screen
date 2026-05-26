@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'core/theme/app_colors.dart';
 
 void main() {
   runApp(const FlickTVApp());
@@ -14,14 +15,19 @@ class FlickTVApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF1A1A1A),
+        scaffoldBackgroundColor: AppColors.background,
+        fontFamily: 'Inter',
         useMaterial3: true,
       ),
       home: const Scaffold(
         body: Center(
           child: Text(
-            'FlickTV Intro - coming soon',
-            style: TextStyle(color: Colors.white70),
+            'Assets loaded',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ),
