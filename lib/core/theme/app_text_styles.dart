@@ -47,10 +47,10 @@ class AppTextStyles {
 
   static const TextStyle tagline = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 28,
-    fontWeight: FontWeight.w700,
+    fontSize: 34,
+    fontWeight: FontWeight.w800,
     color: AppColors.textGhost,
     letterSpacing: -0.5,
-    height: 1.2,
+    height: 1.15,
   );
 }

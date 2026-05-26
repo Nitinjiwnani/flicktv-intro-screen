@@ -21,7 +21,7 @@ class AppColors {
   // Text
   static const Color textPrimary = Color(0xFFFFFFFF);
   static const Color textSecondary = Color(0xFFB0B0B0);
-  static const Color textGhost = Color(0xFF3A3A3A);
+  static const Color textGhost = Color(0xFF555555);
 
   // Confetti palette
   static const List<Color> confettiColors = [
