@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/theme/app_colors.dart';
+import 'features/intro/intro_screen.dart';
 
 void main() {
   runApp(const FlickTVApp());
@@ -19,18 +20,7 @@ class FlickTVApp extends StatelessWidget {
         fontFamily: 'Inter',
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text(
-            'Assets loaded',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-      ),
+      home: const IntroScreen(),
     );
   }
 }
