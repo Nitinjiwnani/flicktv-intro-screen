@@ -4,6 +4,7 @@ import 'animation/intro_animation_controller.dart';
 import 'widgets/add_money_button.dart';
 import 'widgets/background_dots.dart';
 import 'widgets/bottom_tagline.dart';
+import 'widgets/confetti_overlay.dart';
 import 'widgets/feature_card_list.dart';
 import 'widgets/gift_card_row.dart';
 import 'widgets/title_block.dart';
@@ -66,8 +67,23 @@ class _IntroScreenState extends State<IntroScreen>
                 child: IgnorePointer(child: BackgroundDots()),
               ),
 
-              // TODO(feature/confetti): wire ConfettiOverlay here once
-              // particle system is ready.
+              // ── Confetti layer ─────────────────────────────────────────
+              // Isolated in its own AnimatedBuilder so the main tree
+              // (master + wobble) is never rebuilt by confetti ticks.
+              // RepaintBoundary keeps the confetti on its own GPU layer.
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: RepaintBoundary(
+                    child: AnimatedBuilder(
+                      animation: _anim.confetti,
+                      builder: (context, _) => ConfettiOverlay(
+                        particles: _anim.particles,
+                        t: _anim.confettiTime,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
 
               SafeArea(
                 child: Column(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
 
 class WalletWidget extends StatelessWidget {
   /// 0 → 1 (easeOutBack — may briefly exceed 1.0).
