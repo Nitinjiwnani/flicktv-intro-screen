@@ -86,55 +86,55 @@ class IntroAnimationController {
     // Stage 1 – wallet entrance
     walletEntrance = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.00, 0.20, curve: Curves.easeOutBack),
+      curve: const Interval(0.00, 0.12, curve: Curves.easeOutBack),
     );
 
-    // Stage 2 – title reveal
+    // Stage 2 – title reveal (overlaps tail of wallet entrance)
     blinkitFade = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.25, 0.35, curve: Curves.easeOut),
+      curve: const Interval(0.10, 0.20, curve: Curves.easeOut),
     );
     moneyFade = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.30, 0.45, curve: Curves.easeOut),
+      curve: const Interval(0.16, 0.30, curve: Curves.easeOut),
     );
     moneyScale = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.30, 0.45, curve: Curves.elasticOut),
+      curve: const Interval(0.16, 0.30, curve: Curves.elasticOut),
     );
 
-    // Stage 3 – header group slides up
+    // Stage 3 – header group slides up (starts while MONEY is still revealing)
     headerShift = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.38, 0.52, curve: Curves.easeInOut),
+      curve: const Interval(0.28, 0.42, curve: Curves.easeInOut),
     );
 
     // Stage 4 – staggered feature cards
     card1Slide = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.50, 0.62, curve: Curves.easeOutCubic),
+      curve: const Interval(0.38, 0.50, curve: Curves.easeOutCubic),
     );
     card2Slide = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.58, 0.70, curve: Curves.easeOutCubic),
+      curve: const Interval(0.45, 0.57, curve: Curves.easeOutCubic),
     );
     card3Slide = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.66, 0.78, curve: Curves.easeOutCubic),
+      curve: const Interval(0.52, 0.64, curve: Curves.easeOutCubic),
     );
 
     // Stage 5 – CTA + bottom row
     buttonReveal = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.76, 0.86, curve: Curves.easeOut),
+      curve: const Interval(0.60, 0.70, curve: Curves.easeOut),
     );
     giftCardReveal = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.82, 0.92, curve: Curves.easeOut),
+      curve: const Interval(0.66, 0.76, curve: Curves.easeOut),
     );
     taglineFade = CurvedAnimation(
       parent: master,
-      curve: const Interval(0.88, 1.00, curve: Curves.easeIn),
+      curve: const Interval(0.72, 0.84, curve: Curves.easeIn),
     );
 
     // Continuous wobble
