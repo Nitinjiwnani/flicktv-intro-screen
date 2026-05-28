@@ -53,4 +53,31 @@ class AppTextStyles {
     letterSpacing: -0.5,
     height: 1.15,
   );
+
+  /// App bar title — fades in when the user scrolls past the hero header.
+  static const TextStyle appBarTitle = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 17,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textPrimary,
+  );
+
+  /// Muted watermark — small "blinkit" label beneath the greyscale wallet.
+  static const TextStyle watermarkSmall = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: Colors.white70,
+    letterSpacing: 0.2,
+  );
+
+  /// Muted watermark — large "MONEY" label beneath the greyscale wallet.
+  static const TextStyle watermarkLarge = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 26,
+    fontWeight: FontWeight.w800,
+    color: Colors.white70,
+    letterSpacing: 3.0,
+    height: 1.0,
+  );
 }

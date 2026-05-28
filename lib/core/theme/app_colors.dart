@@ -7,7 +7,6 @@ class AppColors {
 
   // Background
   static const Color background = Color(0xFF1A1A1A);
-  static const Color backgroundDeep = Color(0xFF0F0F0F);
 
   // Cards
   static const Color cardBackground = Color(0xFF2A2A2A);
@@ -15,7 +14,6 @@ class AppColors {
 
   // Brand
   static const Color walletGold = Color(0xFFE5B53A);
-  static const Color walletGreen = Color(0xFF4A6B2A);
   static const Color primaryGreen = Color(0xFF318616);
 
   // Text

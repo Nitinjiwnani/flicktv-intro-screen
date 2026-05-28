@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 
@@ -28,7 +29,7 @@ class GiftCardRow extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  'assets/images/gift_card.png',
+                  AppAssets.giftCard,
                   width: 44,
                   height: 44,
                   fit: BoxFit.cover,
