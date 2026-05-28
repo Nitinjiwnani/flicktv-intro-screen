@@ -16,8 +16,8 @@ class _BackgroundDotsPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    const spacing = 14.0;
-    final patternHeight = size.height * 0.32;
+    const spacing = 17.0;                    // was 14 — slightly more airy
+    final patternHeight = size.height * 0.24; // was 0.32 — fades out earlier
 
     for (double y = 0; y < patternHeight; y += spacing) {
       // Stagger every other row by half-spacing for a halftone feel.
@@ -25,8 +25,8 @@ class _BackgroundDotsPainter extends CustomPainter {
       for (double x = -spacing; x < size.width + spacing; x += spacing) {
         final dx = x + rowOffset;
         final t = 1.0 - (y / patternHeight); // fade top → bottom
-        final opacity = (t * 0.45).clamp(0.0, 1.0);
-        final dotSize = 1.2 + (1.4 * t);
+        final opacity = (t * 0.22).clamp(0.0, 1.0); // was 0.45 — much subtler
+        final dotSize = 1.0 + (1.0 * t);             // was 1.2+(1.4*t) — smaller
         paint.color = AppColors.walletGold.withValues(alpha: opacity);
         canvas.drawCircle(Offset(dx, y), dotSize, paint);
       }

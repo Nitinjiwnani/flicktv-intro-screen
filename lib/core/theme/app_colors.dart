@@ -16,7 +16,7 @@ class AppColors {
   // Brand
   static const Color walletGold = Color(0xFFE5B53A);
   static const Color walletGreen = Color(0xFF4A6B2A);
-  static const Color primaryGreen = Color(0xFF2BB673);
+  static const Color primaryGreen = Color(0xFF318616);
 
   // Text
   static const Color textPrimary = Color(0xFFFFFFFF);

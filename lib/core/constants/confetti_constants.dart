@@ -5,8 +5,8 @@ class ConfettiConstants {
 
   static const int particleCount = 80;
   static const double gravity = 380.0; // px/s²
-  static const double minSize = 5.0;
-  static const double maxSize = 12.0;
+  static const double minSize = 3.5;  // was 5.0  — ~30 % finer
+  static const double maxSize = 8.5;  // was 12.0 — ~30 % finer
   static const double minHorizontalVelocity = -120.0;
   static const double maxHorizontalVelocity = 120.0;
   static const double minVerticalVelocity = 40.0;
