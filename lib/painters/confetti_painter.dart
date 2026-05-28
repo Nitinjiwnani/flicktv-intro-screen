@@ -2,56 +2,8 @@ import 'package:flutter/material.dart';
 import '../core/constants/confetti_constants.dart';
 import 'particle.dart';
 
-class ConfettiPainter extends CustomPainter {
-  final List<Particle> particles;
-  final double t; // elapsed seconds
-
-  const ConfettiPainter({required this.particles, required this.t});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..style = PaintingStyle.fill;
-
-    for (final p in particles) {
-      final dt = (t - p.startDelay).clamp(0.0, ConfettiConstants.lifespan);
-      if (dt <= 0) continue;
-
-      final opacity =
-          (1.0 - dt / ConfettiConstants.lifespan).clamp(0.0, 1.0);
-      if (opacity <= 0) continue;
-
-      final x = p.startX * size.width + p.vx * dt;
-      final y = p.startY * size.height +
-          p.vy * dt +
-          0.5 * ConfettiConstants.gravity * dt * dt;
-
-      if (y > size.height + 20 || x < -20 || x > size.width + 20) continue;
-
-      paint.color = p.color.withValues(alpha: opacity);
-
-      canvas.save();
-      canvas.translate(x, y);
-      canvas.rotate(p.rotation0 + p.rotationSpeed * dt);
-      canvas.drawRect(
-        Rect.fromCenter(
-          center: Offset.zero,
-          width: p.width,
-          height: p.height,
-        ),
-        paint,
-      );
-      canvas.restore();
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant ConfettiPainter old) => old.t != t;
-
-  @override
-  bool? hitTest(Offset position) => false;
-}
-
-// Draws a single confetti piece as a rounded rect for variety.
+/// Draws confetti particles alternating between rect and oval shapes
+/// for visual variety. Used exclusively by [ConfettiOverlay].
 class ConfettiCirclePainter extends CustomPainter {
   final List<Particle> particles;
   final double t;

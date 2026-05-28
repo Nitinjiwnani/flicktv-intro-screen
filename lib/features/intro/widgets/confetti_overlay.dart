@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../painters/confetti_painter.dart';
 import '../../../painters/particle.dart';
 
-/// Full-screen confetti layer. Completely non-interactive (IgnorePointer
-/// is applied by the parent Stack so hit-testing is never reached here).
+/// Full-screen confetti layer. Non-interactive — [IgnorePointer] is applied by the parent.
 class ConfettiOverlay extends StatelessWidget {
   final List<Particle> particles;
-  final double t; // elapsed seconds from confetti controller
+  final double t;
 
   const ConfettiOverlay({
     super.key,

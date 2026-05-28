@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../core/constants/app_assets.dart';
 
 class WalletWidget extends StatelessWidget {
   /// 0 → 1 (easeOutBack — may briefly exceed 1.0).
-  /// Drives opacity, scale, and a tiny 15 px settle.
-  /// No large vertical movement — headerShift on the parent group owns
-  /// the upward travel to the final header position.
+  /// Drives opacity, scale, and a 15px settle. HeaderShift owns the 130px travel.
   final double entranceProgress;
 
   /// 0 → 1 oscillating from the wobble controller (repeat-reverse).
@@ -21,13 +20,10 @@ class WalletWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final opacity = entranceProgress.clamp(0.0, 1.0);
 
-    // Scale from 0.6 → 1.0; easeOutBack curve produces the overshoot/bounce
-    // settle feel that previously came from a large vertical drop.
-    // Clamp ceiling at 1.4 so easeOutBack overshoot stays visible but sane.
+    // Scale 0.6→1.0; ceiling 1.4 keeps the easeOutBack overshoot visible.
     final scale = (0.6 + entranceProgress * 0.4).clamp(0.0, 1.4);
 
-    // Tiny 15 px settle gives a physical "drop" hint without conflicting
-    // with the 130 px headerShift applied to the parent group.
+    // 15px settle hint; the 130px travel is owned by the headerShift parent.
     final settleY = (1.0 - entranceProgress) * -15.0;
 
     // Base tilt (-0.18 rad ≈ 10°) with a gentle ±0.07 rad wobble on top.
@@ -45,7 +41,7 @@ class WalletWidget extends StatelessWidget {
               width: 140,
               height: 140,
               child: Image.asset(
-                'assets/images/wallet.png',
+                AppAssets.wallet,
                 width: 140,
                 height: 140,
                 fit: BoxFit.contain,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_text_styles.dart';
 
 class BottomTagline extends StatelessWidget {
@@ -14,7 +15,6 @@ class BottomTagline extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // ── Ghost tagline ──────────────────────────────────────────────────
         Opacity(
           opacity: clamped,
           child: const Center(
@@ -30,7 +30,6 @@ class BottomTagline extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // ── Faint divider — separates tagline from watermark ──────────────
         Opacity(
           opacity: clamped * 0.18,
           child: Container(
@@ -42,9 +41,6 @@ class BottomTagline extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // ── Muted watermark — wallet + blinkit MONEY ───────────────────────
-        // Fades in with the tagline but stays at a very low ceiling (0.08)
-        // so it reads as dark-background texture rather than content.
         Opacity(
           opacity: clamped * 0.25,
           child: const _BottomWatermark(),
@@ -74,7 +70,7 @@ class _BottomWatermark extends StatelessWidget {
             0, 0, 0, 1, 0, //              // A
           ]),
           child: Image.asset(
-            'assets/images/wallet.png',
+            AppAssets.wallet,
             width: 72,
             height: 72,
             fit: BoxFit.contain,
@@ -83,32 +79,11 @@ class _BottomWatermark extends StatelessWidget {
 
         const SizedBox(height: 8),
 
-        // "blinkit" — small, white (appears near-black at 0.08 parent opacity)
-        const Text(
-          'blinkit',
-          style: TextStyle(
-            fontFamily: 'Inter',
-            fontSize: 13,
-            fontWeight: FontWeight.w600,
-            color: Colors.white70,
-            letterSpacing: 0.2,
-          ),
-        ),
+        const Text('blinkit', style: AppTextStyles.watermarkSmall),
 
         const SizedBox(height: 3),
 
-        // "MONEY" — wider tracked, heavier weight
-        const Text(
-          'MONEY',
-          style: TextStyle(
-            fontFamily: 'Inter',
-            fontSize: 26,
-            fontWeight: FontWeight.w800,
-            color: Colors.white70,
-            letterSpacing: 3.0,
-            height: 1.0,
-          ),
-        ),
+        const Text('MONEY', style: AppTextStyles.watermarkLarge),
       ],
     );
   }
