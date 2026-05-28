@@ -26,6 +26,18 @@ class _IntroScreenState extends State<IntroScreen>
   // devices, not as the primary interaction.
   bool _scrollEnabled = false;
 
+  // ── App bar title reveal ───────────────────────────────────────────────────
+  // A lightweight scroll listener flips _showTitle when the offset crosses
+  // 120 px. setState is only called on a boolean change (never per-pixel),
+  // so this never adds rebuild pressure during a smooth scroll.
+  final ScrollController _scrollController = ScrollController();
+  bool _showTitle = false;
+
+  void _onScroll() {
+    final shouldShow = _scrollController.offset > 120.0;
+    if (shouldShow != _showTitle) setState(() => _showTitle = shouldShow);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,12 +51,14 @@ class _IntroScreenState extends State<IntroScreen>
         });
       }
     });
+    _scrollController.addListener(_onScroll);
     // Wait one frame so the first layout is complete before starting.
     WidgetsBinding.instance.addPostFrameCallback((_) => _anim.start());
   }
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _anim.dispose();
     super.dispose();
   }
@@ -88,14 +102,25 @@ class _IntroScreenState extends State<IntroScreen>
               SafeArea(
                 child: Column(
                   children: [
-                    const _TopBar(),
+                    _TopBar(showTitle: _showTitle),
                     Expanded(
-                      child: SingleChildScrollView(
+                      child: ShaderMask(
+                        // Fade the top ~60 px of the scroll viewport so content
+                        // dissolves as it scrolls up rather than hard-clipping.
+                        shaderCallback: (bounds) => const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.transparent, Colors.white],
+                          stops: [0.0, 0.08],
+                        ).createShader(bounds),
+                        blendMode: BlendMode.dstIn,
+                        child: SingleChildScrollView(
                         // Only overflow safety on small devices — not the
                         // intended interaction pattern.
                         // ClampingScrollPhysics after unlock: allows overflow
                         // scrolling on small devices without the spring-force
                         // bounce that would cause a visual jump on unlock.
+                        controller: _scrollController,
                         physics: _scrollEnabled
                             ? const ClampingScrollPhysics()
                             : const NeverScrollableScrollPhysics(),
@@ -117,7 +142,7 @@ class _IntroScreenState extends State<IntroScreen>
                                         _anim.walletEntrance.value,
                                     wobbleValue: _anim.walletWobble.value,
                                   ),
-                                  const SizedBox(height: 28),
+                                  const SizedBox(height: 8),
                                   TitleBlock(
                                     blinkitOpacity: _anim.blinkitFade.value,
                                     moneyFade: _anim.moneyFade.value,
@@ -162,7 +187,7 @@ class _IntroScreenState extends State<IntroScreen>
                               ),
                             ),
 
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 28),
 
                             // ── Ghost tagline ─────────────────────────────
                             BottomTagline(
@@ -172,6 +197,7 @@ class _IntroScreenState extends State<IntroScreen>
                             const SizedBox(height: 24),
                           ],
                         ),
+                      ),
                       ),
                     ),
                   ],
@@ -186,17 +212,39 @@ class _IntroScreenState extends State<IntroScreen>
 }
 
 class _TopBar extends StatelessWidget {
-  const _TopBar();
+  final bool showTitle;
+  const _TopBar({required this.showTitle});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          _CircleButton(icon: Icons.arrow_back_ios_new),
-          _CircleButton(icon: Icons.settings_outlined),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Buttons stay in their fixed positions — Stack does not disturb them.
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _CircleButton(icon: Icons.arrow_back_ios_new),
+              _CircleButton(icon: Icons.settings_outlined),
+            ],
+          ),
+
+          // Title floats centred above the button row; fades on scroll threshold.
+          AnimatedOpacity(
+            opacity: showTitle ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 200),
+            child: const Text(
+              'Blinkit Money',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );
